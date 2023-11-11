@@ -5,4 +5,4 @@ client.on('ready', () => {
     console.log('Logged in!');
 });
 
-client.login();
+client.login()
