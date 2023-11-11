@@ -10,4 +10,4 @@ client.on(Events.ClientReady, () => {
     console.log('Logged in!');
 });
 
-client.login()
+client.login();
