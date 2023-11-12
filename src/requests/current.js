@@ -2,7 +2,7 @@ const axios = require('axios');
 const LANG = 'en';
 async function fetchCurrent(location) {
     return await axios({
-        url: `${process.env.URL}/current.json`,
+        url: `https://api.weatherapi.com/v1/current.json`,
         method: 'get',
         params: {
             q: location,

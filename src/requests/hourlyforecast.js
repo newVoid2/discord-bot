@@ -2,7 +2,7 @@ const axios = require('axios');
 const LANG = 'en';
 async function fetchHourlyForecast(location, forecast_days) {
     return await axios({
-        url: `${process.env.URL}/forecast.json`,
+        url: `https://api.weatherapi.com/v1/forecast.json`,
         method: 'get',
         params: {
             q: location,
@@ -53,4 +53,4 @@ async function fetchHourlyForecast(location, forecast_days) {
 
 module.exports = {
     fetchHourlyForecast,
-}
+};
