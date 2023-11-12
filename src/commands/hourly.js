@@ -1,19 +1,14 @@
 const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
-const {fetchForecast} = require('../requests/forecast');
+const {fetchHourlyForecast} = require('../requests/hourlyforecast');
+const Day = 1;
 
 const data = new SlashCommandBuilder()
-.setName('forecast')
-.setDescription('Replies with the weather forecast')
+.setName('hourly')
+.setDescription('Replies with the weather forecast for each hour of today.')
 .addStringOption((option) => {
     return option
         .setName('location')
         .setDescription('The location can be a city, zip/postal code, or a latitude and longitude.')
-        .setRequired(true);
-})
-.addStringOption((option) => {
-    return option
-        .setName('days')
-        .setDescription('The number of forecast days of your location, maximum 14 days.')
         .setRequired(true);
 })
 .addStringOption((option) => {
@@ -31,12 +26,11 @@ async function execute(interaction) {
     await interaction.deferReply();
 
     const location = interaction.options.getString('location');
-    const forecast_days = interaction.options.getString('days');
     const units = interaction.options.getString('units') || 'imperial';
     const isMetric = units === 'imperial';
 
     try {
-        const {locationName, weatherData} = await fetchForecast(location, Number(forecast_days));
+        const {locationName, weatherData} = await fetchHourlyForecast(location, Day);
         const embed = new EmbedBuilder()
         .setColor(0x3f704d)
         .setTitle(`Weather forecast for ${locationName}`)
@@ -47,17 +41,20 @@ async function execute(interaction) {
         });
     
         for (const day of weatherData) {
-            const temperatureMin = isMetric ? day.temperatureMinF : day.temperatureMinC;
-            const temperatureMax = isMetric ? day.temperatureMaxF : day.temperatureMaxC;
-            const condition = day.weatherCondition;
-            const windSpeedMax = isMetric ? day.windMaxMPH : day.windMaxKPH;
-            const chanceOfRain = day.chanceOfRain;
-            const chanceOfSnow = day.chanceOfSnow;
-    
-            embed.addFields({
-                name: day.date,
-                value: `${isMetric ? `⬇️ Low: ${temperatureMin} F, ⬆️ High: ${temperatureMax} F` : `⬇️ Low: ${temperatureMin}°C, ⬆️ High: ${temperatureMax}°C`}\n🛰️ Weather condition: ${condition}\n🍃 The maximum wind speed is ${isMetric ? `${windSpeedMax} mph` : `${windSpeedMax} kph`}\n☔ The chance of it raining today is ${chanceOfRain}%\n☃️ The chance of it snowing today is ${chanceOfSnow}%`
-            })
+            for (const hour of day.hours) {
+                const temperature = isMetric ? hour.hourTemperatureF : hour.hourTemperatureC;
+                const windChill = isMetric ? hour.hourWindChillF : hour.hourWindChillC;
+                const condition = hour.hourCondition;
+                const heatIndex =  isMetric ? hour.hourHeatIndexF : hour.hourHeatIndexC;
+                const windSpeedMax = isMetric ? hour.hourWindSpeedMPH : hour.hourWindSpeedKPH;
+                const windDirection = hour.hourWindDirection;
+                const windDegree = hour.hourWindDegree;
+        
+                embed.addFields({
+                    name: hour.hourTime,
+                    value: `${isMetric ? `🌡️ Temperature: ${temperature} F` : `🌡️ Temperature: ${temperature}°C`}\n🛰️ Weather condition: ${condition}\n🍃 The maximum wind speed for this hour is ${isMetric ? `${windSpeedMax} mph` : `${windSpeedMax} kph`} at ${windDegree}° ${windDirection}\n💨 The wind chill for this hour is ${isMetric ? `${windChill} F` : `${windChill}°C`} \nThe heat index for this hour is ${heatIndex}`,
+                })
+            }
         }
     
         await interaction.editReply({
