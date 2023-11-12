@@ -1,10 +1,9 @@
 const axios = require('axios');
-const URL = 'https://api.weatherapi.com/v1';
 const FORECAST_DAYS = 3;
-const LANG = 'fr';
+const LANG = 'en';
 async function fetchForecast(location) {
     return await axios({
-        url: `${URL}/forecast.json`,
+        url: `${process.env.URL}/forecast.json`,
         method: 'get',
         params: {
             q: location,
@@ -29,8 +28,8 @@ async function fetchForecast(location) {
                 temperatureMinF: forecastDay.day.mintemp_f,
                 temperatureMaxF: forecastDay.day.maxtemp_f,
 
-                condition: forecastDay.day.condition.text,
-                conditionIcon: forecastDay.day.condition.icon,
+                // condition: forecastDay.day.condition.text,
+                // conditionIcon: forecastDay.day.condition.icon,
             };
         });
 
@@ -41,6 +40,7 @@ async function fetchForecast(location) {
     })
     .catch((error) => {
         console.error(error);
+        throw new Error(`Error fetching forecast for ${locationName}.`)
     })
 }
 
