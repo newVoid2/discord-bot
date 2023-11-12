@@ -35,7 +35,7 @@ async function execute(interaction) {
     
         for (const day of weatherData) {
             embed.addFields({
-                name: day.data,
+                name: day.date,
                 value: `🌅 Sunrise: ${day.sunriseTime}\n🌇 Sunset: ${day.sunsetTime}\n🌔 Moonrise: ${day.moonriseTime}\n🌘 Moonset: ${day.moonsetTime}`,
             })
         }
