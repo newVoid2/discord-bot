@@ -37,23 +37,6 @@ async function fetchForecast(location, forecast_days) {
                 moonriseTime: forecastDay.astro.moonrise,
                 moonsetTime: forecastDay.astro.moonset,
 
-                // hourTime: forecastDay.hour.time,
-                // hourTemperatureC: forecastDay.hour.temp_c,
-                // hourTemperatureF: forecastDay.hour.temp_f,
-                // hourCondition: forecastDay.hour.condition.text,
-                // hourWindDirection: forecastDay.hour.wind_dir,
-                // hourWindDegree: forecastDay.hour.wind_degree,
-                // hourWindSpeedMPH: forecastDay.hour.wind_mph,
-                // hourWindSpeedKPH: forecastDay.hour.wind_kph,
-                // hourWindChillC: forecastDay.hour.windchill_c,
-                // hourWindChillF: forecastDay.hour.windchill_f,
-                // hourHeatIndexC: forecastDay.hour.heatindex_c,
-                // hourHeatIndexF: forecastDay.hour.heatindex_f,
-                // hourWillItRain: forecastDay.hour.will_it_rain,
-                // hourWillItSnow: forecastDay.hour.will_it_snow,
-
-
-
             };
         });
 

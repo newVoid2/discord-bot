@@ -13,7 +13,7 @@ const data = new SlashCommandBuilder()
 .addStringOption((option) => {
     return option
         .setName('days')
-        .setDescription('The number of forecast days of your location, maximum 14 days.')
+        .setDescription('The number of forecast days of your location, maximum 3 days.')
         .setRequired(true);
 })
 .addStringOption((option) => {

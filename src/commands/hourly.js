@@ -52,7 +52,7 @@ async function execute(interaction) {
         
                 embed.addFields({
                     name: hour.hourTime,
-                    value: `${isMetric ? `🌡️ Temperature: ${temperature} F` : `🌡️ Temperature: ${temperature}°C`}\n🛰️ Weather condition: ${condition}\n🍃 The maximum wind speed for this hour is ${isMetric ? `${windSpeedMax} mph` : `${windSpeedMax} kph`} at ${windDegree}° ${windDirection}\n💨 The wind chill for this hour is ${isMetric ? `${windChill} F` : `${windChill}°C`} \nThe heat index for this hour is ${heatIndex}`,
+                    value: `${isMetric ? `🌡️ Temperature: ${temperature} F` : `🌡️ Temperature: ${temperature}°C`}\n🛰️ Weather condition: ${condition}\n🍃 The maximum wind speed for this hour is ${isMetric ? `${windSpeedMax} mph` : `${windSpeedMax} kph`} at ${windDegree}° ${windDirection}\n💨 The wind chill for this hour is ${isMetric ? `${windChill} F` : `${windChill}°C`}\n🫠 The heat index for this hour is ${heatIndex}`,
                 })
             }
         }
