@@ -28,8 +28,10 @@ async function fetchForecast(location) {
                 temperatureMinF: forecastDay.day.mintemp_f,
                 temperatureMaxF: forecastDay.day.maxtemp_f,
 
-                // condition: forecastDay.day.condition.text,
-                // conditionIcon: forecastDay.day.condition.icon,
+                sunriseTime: forecastDay.astro.sunrise,
+                sunsetTime: forecastDay.astro.sunset,
+                moonriseTime: forecastDay.astro.moonrise,
+                moonsetTime: forecastDay.astro.moonset,
             };
         });
 
