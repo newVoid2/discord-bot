@@ -52,7 +52,7 @@ async function execute(interaction) {
 
         embed.addFields({
             name: lastTime,
-            value: `${isMetric ? `🌡️ Temperature: ${temperature} F` : `🌡️ Temperature: ${temperature}°C`}\n🛰️ Weather condition: ${condition} ${conditionIcon}\n🍃 The wind speed is ${isMetric ? `${windSpeed} mph` : `${windSpeed} kph`} at ${windDegree}° ${windDirection}\n⛅ The temperature feels like ${isMetric ? `${feelsLike} F` : `${feelsLike}°C`}\n☁️ The atmospheric pressure: ${pressure} millibars\n🌁 The humidity: ${humidity}`,
+            value: `${isMetric ? `🌡️ Temperature: ${temperature} F` : `🌡️ Temperature: ${temperature}°C`}\n🛰️ Weather condition: ${condition}\n🍃 The wind speed is ${isMetric ? `${windSpeed} mph` : `${windSpeed} kph`} at ${windDegree}° ${windDirection}\n⛅ The temperature feels like ${isMetric ? `${feelsLike} F` : `${feelsLike}°C`}\n☁️ The atmospheric pressure: ${pressure} millibars\n🌁 The humidity: ${humidity}`,
         })
     
         await interaction.editReply({
