@@ -15,14 +15,21 @@ const client = new Client({
     ]
 });
 
-client.commands = new Collection();
-client.commands.set(welcomeCommand.data.name, welcomeCommand);
-client.commands.set(forecastCommand.data.name, forecastCommand);
-client.commands.set(astroCommand.data.name, astroCommand);
-client.commands.set(hourlyCommand.data.name, hourlyCommand);
-client.commands.set(currentCommand.data.name, currentCommand);
+const clientAPI = () => {
+    client.commands = new Collection();
+    client.commands.set(welcomeCommand.data.name, welcomeCommand);
+    client.commands.set(forecastCommand.data.name, forecastCommand);
+    client.commands.set(astroCommand.data.name, astroCommand);
+    client.commands.set(hourlyCommand.data.name, hourlyCommand);
+    client.commands.set(currentCommand.data.name, currentCommand);
 
-client.once(Events.ClientReady, clientReadyHandler);
-client.on(Events.InteractionCreate, interactionCreateHandler)
+    client.once(Events.ClientReady, clientReadyHandler);
+    client.on(Events.InteractionCreate, interactionCreateHandler)
 
-client.login(process.env.DISCORD_TOKEN);
+    client.login(process.env.DISCORD_TOKEN);
+};
+
+module.exports = {
+    clientAPI,
+}
+
